@@ -1,0 +1,26 @@
+diff --git a/node_modules/react-native-v8/src/v8runtime/V8Runtime.h b/node_modules/react-native-v8/src/v8runtime/V8Runtime.h
+index b47adac..486e3d3 100644
+--- a/node_modules/react-native-v8/src/v8runtime/V8Runtime.h
++++ b/node_modules/react-native-v8/src/v8runtime/V8Runtime.h
+@@ -1,7 +1,7 @@
+ #pragma once
+ 
+ #include "jsi/jsi.h"
+-#include "jsi/v8runtime/V8RuntimeConfig.h"
++#include <v8runtime/V8RuntimeConfig.h>
+ #include "libplatform/libplatform.h"
+ #include "v8.h"
+ 
+diff --git a/node_modules/react-native-v8/src/v8runtime/V8RuntimeFactory.h b/node_modules/react-native-v8/src/v8runtime/V8RuntimeFactory.h
+index 02af414..d1fffcc 100644
+--- a/node_modules/react-native-v8/src/v8runtime/V8RuntimeFactory.h
++++ b/node_modules/react-native-v8/src/v8runtime/V8RuntimeFactory.h
+@@ -2,7 +2,7 @@
+ 
+ #include <memory.h>
+ #include "jsi/jsi.h"
+-#include "jsi/v8runtime/V8RuntimeConfig.h"
++#include <v8runtime/V8RuntimeConfig.h>
+ 
+ namespace facebook {
+ 

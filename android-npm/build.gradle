@@ -8,7 +8,7 @@ def json = new JsonSlurper().parseText(inputFile.text)
 def reactNativeVersion = json.version as String
 def (major, minor, patch) = reactNativeVersion.tokenize('.')
 
-def engine = "jsc"
+def js_runtime = "jsc"
 
 abstract class replaceSoTask extends DefaultTask {
     public static String appName = ":app"
@@ -53,7 +53,10 @@ if(Integer.parseInt(minor) < 65) {
 rootProject.getSubprojects().forEach({project ->
     if (project.plugins.hasPlugin("com.android.application")) {
         if(project.ext.react.enableHermes) {
-            engine = "hermes"
+            js_runtime = "hermes"
+        }
+        if (project.configurations.implementation.getDependencies().find { dep -> dep.name == "v8-android" }) {
+            js_runtime = "v8"
         }
 
         if(project.getProperties().get("android") && Integer.parseInt(minor) < 65) {
@@ -84,11 +87,11 @@ rootProject.getSubprojects().forEach({project ->
 })
 
 def minorCopy = Integer.parseInt(minor)
-def aar = file("react-native-reanimated-${minorCopy}-${engine}.aar")
+def aar = file("react-native-reanimated-${minorCopy}-${js_runtime}.aar")
 
 while (!aar.exists()) {
     minorCopy -= 1
-    aar = file("react-native-reanimated-${minorCopy}-${engine}.aar")
+    aar = file("react-native-reanimated-${minorCopy}-${js_runtime}.aar")
     if (minorCopy < 63) {
       throw new GradleException('No aar for react-native-reanimated found.')
     }

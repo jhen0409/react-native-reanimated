@@ -7,8 +7,10 @@
 #include <memory>
 #include <string>
 
-#if FOR_HERMES
+#if JS_RUNTIME_HERMES
 #include <hermes/hermes.h>
+#elif JS_RUNTIME_V8
+#include <v8runtime/V8RuntimeFactory.h>
 #else
 #include <jsi/JSCRuntime.h>
 #endif
@@ -121,9 +123,12 @@ void NativeProxy::installJSIBindings() {
     setGestureState(handlerTag, newState);
   };
 
-#if FOR_HERMES
+#if JS_RUNTIME_HERMES
   std::shared_ptr<jsi::Runtime> animatedRuntime =
       facebook::hermes::makeHermesRuntime();
+#elif JS_RUNTIME_V8
+  std::shared_ptr<jsi::Runtime> animatedRuntime =
+      facebook::createV8Runtime(V8RuntimeConfig());
 #else
   std::shared_ptr<jsi::Runtime> animatedRuntime =
       facebook::jsc::makeJSCRuntime();
