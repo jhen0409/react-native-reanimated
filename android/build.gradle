@@ -33,10 +33,10 @@ def reactNativeThirdParty = new File("$reactNative/ReactAndroid/src/main/jni/thi
 def HOME = System.getProperty("user.home")
 
 def _stackProtectorFlag = true;
-def JS_RUNTIME = System.getenv("JS_RUNTIME") ?: "jsc";
-if (findProject(':app') && project(':app').ext.react.enableHermes) {
-    JS_RUNTIME = "hermes";
-}
+def JS_RUNTIME = System.getenv("JS_RUNTIME") ?: "v8";
+// if (findProject(':app') && project(':app').ext.react.enableHermes) {
+//     JS_RUNTIME = "hermes";
+// }
 // You need to have following folders in this directory:
 //   - boost_1_63_0
 //   - double-conversion-1.1.6

@@ -65,9 +65,9 @@ do
     rm -rf android-npm/react-native-reanimated-"${version_name[$index]}-${js_runtime}".aar
     cp android/build/outputs/aar/*.aar android-npm/react-native-reanimated-"${version_name[$index]}-${js_runtime}".aar
 
-    if [ "${js_runtime}" == "v8" ]; then
-      yarn remove react-native-v8
-    fi
+    # if [ "${js_runtime}" == "v8" ]; then
+    #   yarn remove react-native-v8
+    # fi
   done
 done
 
